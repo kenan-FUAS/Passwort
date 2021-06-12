@@ -10,7 +10,6 @@ import threading
 import sys
 
 current_user = os.getlogin()
-current_harddisk = os.get
 count = 0
 passw = ""
 options = ["d: Titel löschen", "t: Titel anzeigen", "a: Titel hinzufügen", "c: Master-Passwort ändern", "z: Zeitlimit Anwendung", "e: Programm beenden"]
@@ -253,7 +252,7 @@ def AddTitel():         #Titel hinzufügen und neues Passwort erstellen
         if name == "e":
             optionen()      #Rückkehr zu Optionen
 
-        else:
+        elif check(name)==False:
 
             newTitel = open(name + ".txt", "w+")        #Erstellen der neuen Datei
             newTitel.close()
@@ -261,7 +260,8 @@ def AddTitel():         #Titel hinzufügen und neues Passwort erstellen
             newTitel.write(input("Geben Sie den Benutzernamen der Anwendung ein:\t"))       #Hinzufügen des Benutzernamens
             newTitel.close()
             addPass(name)       #Hinzufügen eines neuen Passworts durch die Funktion addPass(name)
-
+        else:
+            optionen()
 
 
 def Back():
@@ -311,6 +311,11 @@ def chMPW():
 
 
 def PasswortErstellung():
+    benutzer_eingabe= input("Möchten Sie das Passwort automatisch generieren lasssen? y/n\t").lower()
+    if benutzer_eingabe == "n":
+        neues_Password=input("neues Passwort eingeben:\t ")
+        return neues_Password
+    elif benutzer_eingabe =="y":
 
         def scanner_PW_Length():  # um die Länge des Passwords aufzunehmen
 
@@ -390,7 +395,7 @@ def PasswortErstellung():
                 else:
                     for i in range(length):
                         str += random.choice(string.ascii_lowercase + string.digits)
-            else:  # Überprüfen Falls keine Numbers erwünscht sind____
+            else:  # Überprüfen Falls keine Numbers erwünscht sind__
 
                 if boolean_GroßLetter and boolean_Sonderzeichen:
                     for i in range(length):
@@ -412,6 +417,9 @@ def PasswortErstellung():
             return str
 
         return password(password_Length, boolean_Number, boolean_GroßLetter, boolean_Sonderzeichen)
+    else:
+        print("Falsche Eingabe!!")
+        return PasswortErstellung()
 
     #Anmeldung:
 def Anmeldung():
@@ -453,8 +461,22 @@ def thread():
         countdown_thread = threading.Thread(target=countdown2)      #starten des threads 'countdown2()'
         countdown_thread.start()
 
+def check(name):
+    path = os.chdir(pfad + "\\PManager\\passwords")
+    list = os.listdir(path)
+    if list == []:
+
+        return False
+    for titel in os.listdir(path):
+        if titel.removesuffix(".txt") == name:
+            print("Titel schon vorhanden. Bitte anderen Titelnamen hinzufügen.")
+            time.sleep(1.5)
+            return True
+
+        else:
+            return False
 
 
 #Main-Programm
 
-Anmeldung()     #Aufrufen der Funktion Anmeldung()
+Anmeldung()    #Aufrufen der Funktion Anmeldung()
