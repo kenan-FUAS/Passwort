@@ -15,7 +15,7 @@ options = ["d: Titel löschen", "t: Titel anzeigen", "a: Titel hinzufügen", "c:
 os.chdir(r"C:\Users\felix\Desktop")
 pfad = os.getcwd()      #Pfad, in dem die Ordner gespeichert werden
 
-#siufiuzuzuzuzuzzuzu
+
 #Anzeigen der Optionen:
 def optionen():
 
