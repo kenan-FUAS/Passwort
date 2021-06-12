@@ -9,10 +9,12 @@ from tkinter import Tk
 import threading
 import sys
 
+current_user = os.getlogin()
+current_harddisk = os.get
 count = 0
 passw = ""
 options = ["d: Titel löschen", "t: Titel anzeigen", "a: Titel hinzufügen", "c: Master-Passwort ändern", "z: Zeitlimit Anwendung", "e: Programm beenden"]
-os.chdir(r"C:\Users\felix\Desktop")
+os.chdir(r"C:\Users\\"+current_user+"\Desktop")
 pfad = os.getcwd()      #Pfad, in dem die Ordner gespeichert werden
 
 
@@ -132,7 +134,7 @@ def countdown2():               #Timer für das automatische Abmelden nach x Min
 def Zeitlimit():                #Wählen des Zeitlimits, bis automatisch beendet werden soll
     Zeitoptionen=["a: 1 Minute","b: 5 Minuten","c: 10 Minuten","d: 30 Minuten","e: 1 Stunde","f: 2 Stunden"]
     R = open(pfad + "\\PManager\\Zeitlimit\\Zeitlimit.txt", "r")    #Aufrufen der Datei, in der das Zeitlimit gespeichert ist
-    print("\nAktuelles Zeitlimit: "+R.read()+" Minuten.")   #Anzeigen des aktuellen Zeitlimits
+    print("\nAktuelles Zeitlimit: "+R.read()+" Minute(n).")   #Anzeigen des aktuellen Zeitlimits
     R.close()
     n = input("Möchten Sie ein neues Zeitlimit festlegen?y/n\t").lower()
 
@@ -285,9 +287,15 @@ def chMPW():
             neu = input("Neues Passwort:\t")
             neu2 = input("Neues Passwort wiederholen:\t")       #doppelte Eingabe des neuen Passworts, um Schreibfehler vorzubeugen
             if neu == neu2:     #Überprüfung, ob beide Eingaben identisch sind
+                if neu.__contains__(" "):
+                    print("Passwort darf nicht ausbsjh")
+                    time.sleep(1.5)
+                    optionen()
+
                 os.chdir(pfad+"\\PManager\\MasterPW")   #ändern des Datei-Pfads in den Ordner 'MasterPW'
                 w = open("MasterPW.txt", "w")       #öffnen der Text-Datei, in welcher das MasterPW gespeichert ist
                 w.write(neu)        #Überschreiben des alten MasterPW mit dem neuen MasterPW
+                w.close()
                 print("Master-Passwort erfolgreich geändert.")
                 optionen()      #Rückkehr Optionen
             else:
