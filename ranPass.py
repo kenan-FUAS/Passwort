@@ -213,7 +213,7 @@ def showTitel():                #Titel anzeigen und Passwort in Zwischenablage s
             print("Eingabe stimmt nicht überein.")
             showTitel()     #erneutes Aufrufen der Funktion 'ShowTitel'
     else:
-        print("es sind noch keine Titeln vorhanden\n")
+        print("Es sind noch keine Titel vorhanden\n")
         time.sleep(0.5)
         optionen()
 
@@ -244,7 +244,7 @@ def delete():            #Löschen von Titeln
             print("Dieser Titel existiert nicht.\n")
             delete()            #erneutes Aufrufen der Funktion 'Delete()'
     else:
-        print("Sie haben noch keine Titeln hinzugefügt!\n")
+        print("Sie haben noch keine Titel hinzugefügt!\n")
         time.sleep(0.5)
         optionen()
 
@@ -432,7 +432,7 @@ def  anmeldung():
         print("Willkommen.")
         benutzer_password = input("Geben Sie ihr Masterpasswort ein:\t")  # Eingabe des MasterPW1
         if benutzer_password.__contains__(" ") or benutzer_password =="": #U m zu vermeiden, dass das Password nicht aus Leerzeichen oder nichts bestehen
-            print("das Passwort darf nicht über leerzeichen verfügen oder aus nichts oder Leerzeichen bestehen!!\nSie müssen ein richtiges Passwort eingeben!!\n")
+            print("Das Passwort darf nicht über Leerzeichen verfügen oder aus nichts oder Leerzeichen bestehen!!\nSie müssen ein richtiges Passwort eingeben!!\n")
             time.sleep(0.5)
             anmeldung()
         else:
@@ -494,7 +494,7 @@ def exceptionHandling():
     elif eingabe == "n":
         shutil.rmtree(pfad + "\\PManager")
     else:
-        print("Falsche eingabe! bitte richtig eingeben!!")
+        print("Falsche eingabe! Bitte richtig eingeben!!")
         time.sleep(2)
         exceptionHandling()
 
