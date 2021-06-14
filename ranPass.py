@@ -226,8 +226,8 @@ def delete():            #Löschen von Titeln
     if list != []:
         print("")
         print("Titel:")                      #--> Listet alle Titel im Ordner 'passwords' auf
-        for x in range(len(path)):
-            print(path[x])
+        for x in range(len(list)):
+            print(list[x])
         print("")
         os.chdir(pfad+"\\PManager\\passwords") #Ändert Dateizugriff, sodass Titel bearbeitet werden können
         delTitel = input("Welcher Titel soll gelöscht werden?('e' zum zurückkehren)\t")+".txt"    #Auswahl des Titels + sparen des .txt
@@ -245,7 +245,7 @@ def delete():            #Löschen von Titeln
             delete()            #erneutes Aufrufen der Funktion 'Delete()'
     else:
         print("Sie haben noch keine Titel hinzugefügt!\n")
-        time.sleep(0.5)
+        time.sleep(1.5)
         optionen()
 
 
@@ -461,7 +461,7 @@ def  anmeldung():
                  exit()
         except Exception as e:
             print(e.args)
-            print("\nleider wurde offensichtlich eine für das Programm relevante Datei gelöscht\n")
+            print("\nLeider wurde offensichtlich eine für das Programm relevante Datei gelöscht.\n")
             time.sleep(1)
             if os.path.exists(pfad+"\\PManager"+"\\MasterPW"):
                 shutil.rmtree(pfad +"\\PManager"+"\\MasterPW")
@@ -472,13 +472,13 @@ def  anmeldung():
 
 
 def exceptionHandling():
-    eingabe = input("Möchten Sie eine Recovery durchführen, indem ein neues Password für das Programm erstellen müssen?y/n\t")
+    eingabe = input("Möchten Sie eine Recovery durchführen, indem Sie ein neues Password für das Programm erstellen müssen?y/n\t")
     if eingabe =="y":
         os.chdir(pfad + "\\PManager")  # ändert Dateien-Pfad
         os.makedirs("MasterPW")  # erstellt Ordner 'MasterPW' in Ordner 'PManager'
         benutzer_passwort = input("Geben Sie ihr Masterpasswort ein:\t")  # Eingabe des MasterPW1
         if benutzer_passwort.__contains__(" ") or benutzer_passwort == "":
-            print("das geht gar nicht")
+            print("Das geht gar nicht")
             anmeldung()
         else:
             masterPassword_Datei = open(pfad + "\\PManager\\MasterPW\\MasterPW.txt","w+")  # Erstellen der Textdatei, in welcher das MasterPW gespeichert wird
@@ -492,7 +492,19 @@ def exceptionHandling():
             optionen()  # Rückkehr zu Optionen
 
     elif eingabe == "n":
-        shutil.rmtree(pfad + "\\PManager")
+        last_question = input("Sind Sie sicher? Alle Ihre Daten werden unwiderruflich gelöscht.y/n\t")
+        if last_question == "y":
+            shutil.rmtree(pfad + "\\PManager")
+            print("Alle Daten gelöscht. Das Programm wird beendet.")
+            os.execl(sys.executable, sys.executable, *sys.argv)
+
+        elif last_question == "n":
+            exceptionHandling()
+        else:
+            print("Falsche Eingabe.")
+            time.sleep(1)
+            exceptionHandling()
+
     else:
         print("Falsche eingabe! Bitte richtig eingeben!!")
         time.sleep(2)
