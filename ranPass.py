@@ -18,7 +18,7 @@ os.chdir(r"C:\Users\\"+current_user+"\Desktop")
 pfad = os.getcwd()      #Pfad, in dem die Ordner gespeichert werden
 
 
-#Anzeigen der Optionen:
+#Anzeigen der Optionen :
 def optionen():
         print("\nWas möchten Sie tun?\t")
         print("")
