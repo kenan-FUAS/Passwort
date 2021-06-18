@@ -214,7 +214,7 @@ def showTitel():                #Titel anzeigen und Passwort in Zwischenablage s
             showTitel()     #erneutes Aufrufen der Funktion 'ShowTitel'
     else:
         print("Es sind noch keine Titel vorhanden\n")
-        time.sleep(0.5)
+        time.sleep(1.5)
         optionen()
 
 
