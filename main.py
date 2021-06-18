@@ -313,7 +313,7 @@ def chMPW():
 def PasswortErstellung():
     benutzer_eingabe= input("Möchten Sie das Passwort automatisch generieren lasssen? y/n\t").lower()
     if benutzer_eingabe == "n":
-        neues_Password=input("neues Passwort eingeben:\t ")
+        neues_Password=input("Neues Passwort eingeben:\t ")
         return neues_Password
     elif benutzer_eingabe =="y":
 
